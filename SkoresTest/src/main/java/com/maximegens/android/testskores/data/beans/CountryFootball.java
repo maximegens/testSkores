@@ -15,13 +15,13 @@ public class CountryFootball implements Parcelable {
     private String name;
 
     /** url image for country **/
-    private String urlImage;
+    private String imageURL;
 
     /** number event of country **/
     private int nbEvents;
 
     /** number of live events for country **/
-    private int nbEventsLive;
+    private int nbLiveEvents;
 
     public long getId() {
         return id;
@@ -39,28 +39,16 @@ public class CountryFootball implements Parcelable {
         this.name = name;
     }
 
-    public String getUrlImage() {
-        return urlImage;
-    }
-
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public String getImageURL() {
+        return imageURL;
     }
 
     public int getNbEvents() {
         return nbEvents;
     }
 
-    public void setNbEvents(int nbEvents) {
-        this.nbEvents = nbEvents;
-    }
-
-    public int getNbEventsLive() {
-        return nbEventsLive;
-    }
-
-    public void setNbEventsLive(int nbEventsLive) {
-        this.nbEventsLive = nbEventsLive;
+    public int getNbLiveEvents() {
+        return nbLiveEvents;
     }
 
     @Override
@@ -72,9 +60,9 @@ public class CountryFootball implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeLong(id);
         parcel.writeString(name);
-        parcel.writeString(urlImage);
+        parcel.writeString(imageURL);
         parcel.writeInt(nbEvents);
-        parcel.writeInt(nbEventsLive);
+        parcel.writeInt(nbLiveEvents);
     }
 
     public static final Parcelable.Creator<CountryFootball> CREATOR = new Parcelable.Creator<CountryFootball>() {
@@ -91,8 +79,8 @@ public class CountryFootball implements Parcelable {
     public CountryFootball(Parcel in) {
         this.id = in.readLong();
         this.name = in.readString();
-        this.urlImage = in.readString();
+        this.imageURL = in.readString();
         this.nbEvents = in.readInt();
-        this.nbEventsLive = in.readInt();
+        this.nbLiveEvents = in.readInt();
     }
 }

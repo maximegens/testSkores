@@ -25,18 +25,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="2"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <FrameLayout
             android:id="@+id/fragmentLayout_list_country"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"/>
 
         <FrameLayout
             android:id="@+id/fragmentLayout_detail_country"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"/>
 
     </LinearLayout>

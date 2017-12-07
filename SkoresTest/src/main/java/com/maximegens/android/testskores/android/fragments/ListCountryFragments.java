@@ -1,7 +1,8 @@
-package com.maximegens.android.testskores.fragments;
+package com.maximegens.android.testskores.android.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,12 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.maximegens.android.testskores.activities.MainActivity;
-import com.maximegens.android.testskores.activities.R;
-import com.maximegens.android.testskores.adapters.AdapterCountry;
-import com.maximegens.android.testskores.adapters.RecyclerViewListener;
-import com.maximegens.android.testskores.asynctask.AsyncResponse;
-import com.maximegens.android.testskores.asynctask.ListCountryTask;
+import com.maximegens.android.testskores.android.activities.MainActivity;
+import com.maximegens.android.testskores.android.activities.R;
+import com.maximegens.android.testskores.android.adapters.AdapterCountry;
+import com.maximegens.android.testskores.android.adapters.RecyclerViewListener;
+import com.maximegens.android.testskores.android.asynctask.AsyncResponse;
+import com.maximegens.android.testskores.android.asynctask.ListCountryTask;
 import com.maximegens.android.testskores.data.beans.CountryFootball;
 
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ import java.util.List;
  */
 public class ListCountryFragments extends Fragment implements AsyncResponse, RecyclerViewListener {
 
+    /** KEY to save data with savedInstance **/
+    private static final String KEY_SAVED_LIST = "savedInstanceList";
     /** KEY for title**/
     private static final String TITLE = "TITLE";
     /** List of football country **/
@@ -69,11 +72,16 @@ public class ListCountryFragments extends Fragment implements AsyncResponse, Rec
         progressBar = (ProgressBar) view.findViewById(R.id.progressbar_list_country);
         labelProgressBar = (TextView) view.findViewById(R.id.label_progress_bar_list_country);
 
-        // Get list football Country
-        displayLoading(true);
-        ListCountryTask listCountryTask = new ListCountryTask();
-        listCountryTask.delegate = this;
-        listCountryTask.execute();
+        if (savedInstanceState != null && savedInstanceState.getParcelableArrayList(KEY_SAVED_LIST) != null){
+            this.listCountry = savedInstanceState.getParcelableArrayList(KEY_SAVED_LIST);
+            displayLoading(false);
+        }else{
+            // Get list football Country
+            displayLoading(true);
+            ListCountryTask listCountryTask = new ListCountryTask();
+            listCountryTask.delegate = this;
+            listCountryTask.execute();
+        }
 
         adapterCountry = new AdapterCountry(listCountry, this);
         recyclerViewCountry.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -96,7 +104,14 @@ public class ListCountryFragments extends Fragment implements AsyncResponse, Rec
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelableArrayList(KEY_SAVED_LIST, (ArrayList<? extends Parcelable>) this.listCountry);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
     public void downloadFinish(List<CountryFootball> listCountry) {
+        this.listCountry = listCountry;
         adapterCountry.setListCountry(listCountry);
         adapterCountry.notifyDataSetChanged();
         displayLoading(false);

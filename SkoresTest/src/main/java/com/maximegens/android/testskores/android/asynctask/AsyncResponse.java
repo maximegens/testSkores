@@ -1,4 +1,4 @@
-package com.maximegens.android.testskores.asynctask;
+package com.maximegens.android.testskores.android.asynctask;
 
 import com.maximegens.android.testskores.data.beans.CountryFootball;
 

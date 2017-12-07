@@ -1,4 +1,4 @@
-package com.maximegens.android.testskores.fragments;
+package com.maximegens.android.testskores.android.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,14 +9,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.maximegens.android.testskores.activities.R;
+import com.maximegens.android.testskores.android.activities.R;
 import com.maximegens.android.testskores.data.beans.CountryFootball;
+import com.maximegens.android.testskores.services.SkoresService;
+import com.squareup.picasso.Picasso;
 
 
 /**
  * A detail view fragment for display name and image of country.
  */
 public class DetailCountryFragments extends Fragment {
+
+    /** KEY to save data with savedInstance **/
+    private static final String KEY_SAVED_DETAIL = "savedInstanceDetail";
 
     /** Key for title **/
     private static final String TITLE = "TITLE";
@@ -70,14 +75,41 @@ public class DetailCountryFragments extends Fragment {
         if (getArguments() != null && getArguments().containsKey(ARG_ITEM_ID)) {
             countryFootball = getArguments().getParcelable(ARG_ITEM_ID);
         }
+
+        if (savedInstanceState != null && savedInstanceState.getParcelable(KEY_SAVED_DETAIL) != null){
+            this.countryFootball = savedInstanceState.getParcelable(KEY_SAVED_DETAIL);
+        }
+
         // Display or hide select country message
         selectCountry.setVisibility(countryFootball == null ? View.VISIBLE : View.GONE);
 
         // Fill country data
         if(countryFootball != null){
-            nameCountry.setText(countryFootball.getName());
-            nbEvents.setText(String.valueOf(countryFootball.getNbEvents()));
-            nbEventsLive.setText(String.valueOf(countryFootball.getNbEventsLive()));
+            fillCountry();
+        }
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putParcelable(KEY_SAVED_DETAIL, this.countryFootball);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    /**
+     * Fill country with data
+     */
+    private void fillCountry() {
+        nameCountry.setText(countryFootball.getName());
+        nbEvents.setText(String.valueOf(countryFootball.getNbEvents()));
+        nbEventsLive.setText(String.valueOf(countryFootball.getNbLiveEvents()));
+        if(countryFootball.getImageURL() != null && !countryFootball.getImageURL().isEmpty()){
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(SkoresService.URL_IMAGE);
+            stringBuilder.append(countryFootball.getImageURL());
+            stringBuilder.append(SkoresService.EXTENSION_IMAGE);
+            String adresseUrl = stringBuilder.toString();
+            Picasso.with(getContext()).load(adresseUrl).fit().centerInside().into(imageViewCountry);
         }
     }
 }

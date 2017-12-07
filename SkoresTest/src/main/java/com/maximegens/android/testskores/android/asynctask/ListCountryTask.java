@@ -1,9 +1,8 @@
-package com.maximegens.android.testskores.asynctask;
+package com.maximegens.android.testskores.android.asynctask;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.maximegens.android.testskores.asynctask.AsyncResponse;
 import com.maximegens.android.testskores.data.beans.CountryFootball;
 import com.maximegens.android.testskores.services.SkoresService;
 

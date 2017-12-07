@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Skores</string>
-
     <string name="action_settings">Settings</string>
+
+    <!-- Message Activity -->
+    <string name="send_mail">Envoie d\'un e-mail</string>
+    <string name="action_mail">Action</string>
 
     <!-- Message Detail Country -->
     <string name="detail_tools_nb_match_country">Nombre de match du pays</string>

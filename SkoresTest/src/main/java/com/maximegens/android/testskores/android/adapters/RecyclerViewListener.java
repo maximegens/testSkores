@@ -1,6 +1,4 @@
-package com.maximegens.android.testskores.adapters;
-
-import android.view.View;
+package com.maximegens.android.testskores.android.adapters;
 
 import com.maximegens.android.testskores.data.beans.CountryFootball;
 

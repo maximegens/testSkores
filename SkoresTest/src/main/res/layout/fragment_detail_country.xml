@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/detail_image_pays"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="@dimen/size_img_country_width"
+        android:layout_height="@dimen/size_img_country_height" />
 
     <TextView
         android:id="@+id/detail_name_country"

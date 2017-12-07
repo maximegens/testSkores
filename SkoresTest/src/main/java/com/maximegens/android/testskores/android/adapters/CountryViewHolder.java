@@ -1,10 +1,10 @@
-package com.maximegens.android.testskores.adapters;
+package com.maximegens.android.testskores.android.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.maximegens.android.testskores.activities.R;
+import com.maximegens.android.testskores.android.activities.R;
 import com.maximegens.android.testskores.data.beans.CountryFootball;
 
 /**
