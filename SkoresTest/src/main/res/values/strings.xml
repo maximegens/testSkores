@@ -7,4 +7,7 @@
     <string name="detail_tools_nb_match_country">Nombre de match du pays</string>
     <string name="detail_tools_name_country">Nom du pays</string>
 
+    <!-- Loading messages -->
+    <string name="message_country_loading">Récupération des pays en cours...</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.maximegens.android.testskores.android.activities;
+package com.maximegens.android.testskores.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

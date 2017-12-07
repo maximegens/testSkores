@@ -9,12 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.maximegens.android.testskores.R;
-import com.maximegens.android.testskores.android.activities.MainActivity;
-import com.maximegens.android.testskores.android.adapters.AdapterCountry;
-
+import com.maximegens.android.testskores.activities.MainActivity;
+import com.maximegens.android.testskores.adapters.AdapterCountry;
+import com.maximegens.android.testskores.asynctask.AsyncResponse;
+import com.maximegens.android.testskores.asynctask.ListCountryTask;
 import com.maximegens.android.testskores.data.beans.CountryFootball;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +26,7 @@ import java.util.List;
 /**
  * A fragment for display football country list.
  */
-public class ListCountryFragments extends Fragment{
+public class ListCountryFragments extends Fragment implements AsyncResponse{
 
     /** KEY for title**/
     private static final String TITLE = "TITLE";
@@ -34,6 +38,10 @@ public class ListCountryFragments extends Fragment{
     private RecyclerView recyclerViewCountry;
     /** Adapter for football country **/
     private AdapterCountry adapterCountry;
+    /** Progress for loading data **/
+    private ProgressBar progressBar;
+    /** indication text for loading **/
+    private TextView labelProgressBar;
 
     /** Interface for communicate with activity **/
     public interface ListCountryFragmentsCallback {
@@ -57,9 +65,16 @@ public class ListCountryFragments extends Fragment{
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        recyclerViewCountry = (RecyclerView) view.findViewById(R.id.recyclerViewPays);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressbar_list_country);
+        labelProgressBar = (TextView) view.findViewById(R.id.label_progress_bar_list_country);
 
-        recyclerViewCountry = view.findViewById(R.id.recyclerViewPays);
+        // Get list football Country
+        displayLoading(true);
+        ListCountryTask listCountryTask = new ListCountryTask();
+        listCountryTask.delegate = this;
+        listCountryTask.execute();
+
         adapterCountry = new AdapterCountry(listCountry);
         recyclerViewCountry.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewCountry.setAdapter(adapterCountry);
@@ -78,6 +93,23 @@ public class ListCountryFragments extends Fragment{
     public void onDetach() {
         super.onDetach();
         listCountryFragmentsCallback = null;
+    }
+
+    @Override
+    public void downloadFinish(List<CountryFootball> listCountry) {
+        adapterCountry.setListCountry(listCountry);
+        adapterCountry.notifyDataSetChanged();
+        displayLoading(false);
+    }
+
+    /**
+     * Display or hide a loading information
+     * @param isDisplay a boolean
+     */
+    private void displayLoading(boolean isDisplay){
+        progressBar.setVisibility(isDisplay ? View.VISIBLE : View.GONE);
+        labelProgressBar.setVisibility(isDisplay ? View.VISIBLE : View.GONE);
+        recyclerViewCountry.setVisibility(isDisplay ? View.GONE : View.VISIBLE);
     }
 
 }

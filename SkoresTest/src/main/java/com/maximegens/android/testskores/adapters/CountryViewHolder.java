@@ -1,4 +1,4 @@
-package com.maximegens.android.testskores.android.adapters;
+package com.maximegens.android.testskores.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
