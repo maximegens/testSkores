@@ -22,7 +22,6 @@ public class CountryViewHolder extends RecyclerView.ViewHolder{
     public CountryViewHolder(View itemView) {
         super(itemView);
         nameCountry = (TextView) itemView.findViewById(R.id.item_country_label);
-
     }
 
     /**

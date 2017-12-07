@@ -14,7 +14,6 @@ import com.maximegens.android.testskores.data.beans.CountryFootball;
 import com.maximegens.android.testskores.services.SkoresService;
 import com.squareup.picasso.Picasso;
 
-
 /**
  * A detail view fragment for display name and image of country.
  */
@@ -22,28 +21,20 @@ public class DetailCountryFragments extends Fragment {
 
     /** KEY to save data with savedInstance **/
     private static final String KEY_SAVED_DETAIL = "savedInstanceDetail";
-
     /** Key for title **/
     private static final String TITLE = "TITLE";
-
     /** KEY for item **/
     public static final String ARG_ITEM_ID = "country_id";
-
     /** Name of football country **/
     private TextView nameCountry;
-
     /** number event **/
     private TextView nbEvents;
-
     /** number event lives **/
     private TextView nbEventsLive;
-
     /** message select country **/
     private TextView selectCountry;
-
     /** ImageView **/
     private ImageView imageViewCountry;
-
     /** FootBall Country **/
     private CountryFootball countryFootball;
 
@@ -89,7 +80,6 @@ public class DetailCountryFragments extends Fragment {
         }
     }
 
-
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putParcelable(KEY_SAVED_DETAIL, this.countryFootball);
@@ -104,11 +94,7 @@ public class DetailCountryFragments extends Fragment {
         nbEvents.setText(String.valueOf(countryFootball.getNbEvents()));
         nbEventsLive.setText(String.valueOf(countryFootball.getNbLiveEvents()));
         if(countryFootball.getImageURL() != null && !countryFootball.getImageURL().isEmpty()){
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(SkoresService.URL_IMAGE);
-            stringBuilder.append(countryFootball.getImageURL());
-            stringBuilder.append(SkoresService.EXTENSION_IMAGE);
-            String adresseUrl = stringBuilder.toString();
+            String adresseUrl = SkoresService.URL_IMAGE + countryFootball.getImageURL() + SkoresService.EXTENSION_IMAGE;
             Picasso.with(getContext()).load(adresseUrl).fit().centerInside().into(imageViewCountry);
         }
     }

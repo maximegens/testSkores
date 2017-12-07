@@ -17,7 +17,6 @@ public class AdapterCountry extends RecyclerView.Adapter<CountryViewHolder>{
 
     /** Listener for click **/
     private RecyclerViewListener recyclerViewListener;
-
     /** List of country **/
     private List<CountryFootball> listCountry;
 

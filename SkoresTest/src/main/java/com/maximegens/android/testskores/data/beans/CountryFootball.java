@@ -10,16 +10,12 @@ public class CountryFootball implements Parcelable {
 
     /** id **/
     private long id;
-
     /** country name **/
     private String name;
-
     /** url image for country **/
     private String imageURL;
-
     /** number event of country **/
     private int nbEvents;
-
     /** number of live events for country **/
     private int nbLiveEvents;
 

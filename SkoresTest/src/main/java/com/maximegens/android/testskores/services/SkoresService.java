@@ -1,6 +1,5 @@
 package com.maximegens.android.testskores.services;
 
-
 import com.maximegens.android.testskores.data.beans.CountryFootball;
 
 import java.util.List;

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 import com.maximegens.android.testskores.data.beans.CountryFootball;
 import com.maximegens.android.testskores.android.fragments.DetailCountryFragments;
 import com.maximegens.android.testskores.android.fragments.ListCountryFragments;
@@ -19,9 +18,6 @@ import com.maximegens.android.testskores.android.fragments.ListCountryFragments;
  * Class with two fragments and FAB
  */
 public class MainActivity extends AppCompatActivity implements ListCountryFragments.ListCountryFragmentsCallback {
-
-    /** country Selected**/
-    private CountryFootball countryFootballSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements ListCountryFragme
 
     @Override
     public void onCountrySelected(CountryFootball countryFootball) {
-        this.countryFootballSelected = countryFootball;
         createDetailFragment(countryFootball);
     }
 
