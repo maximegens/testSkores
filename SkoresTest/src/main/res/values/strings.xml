@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name">TestSkores</string>
+    <string name="app_name">Skores</string>
+
     <string name="action_settings">Settings</string>
+
+    <!-- Message Detail Country -->
+    <string name="detail_tools_nb_match_country">Nombre de match du pays</string>
+    <string name="detail_tools_name_country">Nom du pays</string>
+
 </resources>

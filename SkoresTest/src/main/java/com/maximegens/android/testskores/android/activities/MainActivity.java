@@ -1,4 +1,4 @@
-package com.maximegens.android.testskores.activities;
+package com.maximegens.android.testskores.android.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,22 +9,38 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.maximegens.android.testskores.R;
 
-public class MainActivity extends AppCompatActivity {
+import com.maximegens.android.testskores.R;
+import com.maximegens.android.testskores.data.beans.CountryFootball;
+import com.maximegens.android.testskores.fragments.DetailCountryFragments;
+import com.maximegens.android.testskores.fragments.ListCountryFragments;
+
+/**
+ * Main Activity.
+ * Class with two fragments and FAB
+ */
+public class MainActivity extends AppCompatActivity implements ListCountryFragments.ListCountryFragmentsCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentLayout_list_country, ListCountryFragments.newInstance("Liste des pays"))
+                .commit();
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentLayout_detail_country, DetailCountryFragments.newInstance("Détail"))
+                .commit();
+
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Envoie d'un e-mail", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -32,23 +48,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCountrySelected(CountryFootball countryFootball) {
+
     }
 }
