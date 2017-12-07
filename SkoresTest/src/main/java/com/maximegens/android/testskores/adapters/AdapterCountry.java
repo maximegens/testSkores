@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.maximegens.android.testskores.R;
+import com.maximegens.android.testskores.activities.R;
 import com.maximegens.android.testskores.data.beans.CountryFootball;
 
 import java.util.List;
@@ -15,6 +15,9 @@ import java.util.List;
  */
 public class AdapterCountry extends RecyclerView.Adapter<CountryViewHolder>{
 
+    /** Listener for click **/
+    private RecyclerViewListener recyclerViewListener;
+
     /** List of country **/
     private List<CountryFootball> listCountry;
 
@@ -22,8 +25,9 @@ public class AdapterCountry extends RecyclerView.Adapter<CountryViewHolder>{
      * Constructeur
      * @param list Football country list
      */
-    public AdapterCountry(List<CountryFootball> list) {
+    public AdapterCountry(List<CountryFootball> list, RecyclerViewListener recyclerViewListener) {
         this.listCountry = list;
+        this.recyclerViewListener = recyclerViewListener;
     }
 
     /**
@@ -42,8 +46,14 @@ public class AdapterCountry extends RecyclerView.Adapter<CountryViewHolder>{
 
     @Override
     public void onBindViewHolder(CountryViewHolder holder, int position) {
-        CountryFootball country = listCountry.get(position);
+        final CountryFootball country = listCountry.get(position);
         holder.bind(country);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerViewListener.onClickRecyclerView(country);
+            }
+        });
     }
 
     @Override

@@ -8,9 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
-import com.maximegens.android.testskores.R;
 import com.maximegens.android.testskores.data.beans.CountryFootball;
 import com.maximegens.android.testskores.fragments.DetailCountryFragments;
 import com.maximegens.android.testskores.fragments.ListCountryFragments;
@@ -66,5 +66,12 @@ public class MainActivity extends AppCompatActivity implements ListCountryFragme
     @Override
     public void onCountrySelected(CountryFootball countryFootball) {
 
+        Bundle arguments = new Bundle();
+        arguments.putParcelable(DetailCountryFragments.ARG_ITEM_ID, countryFootball);
+        DetailCountryFragments fragment = DetailCountryFragments.newInstance("Détail");
+        fragment.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentLayout_detail_country, fragment)
+                .commit();
     }
 }

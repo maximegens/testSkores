@@ -1,9 +1,12 @@
 package com.maximegens.android.testskores.data.beans;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Bean who represent a footbal country.
  */
-public class CountryFootball {
+public class CountryFootball implements Parcelable {
 
     /** id **/
     private long id;
@@ -58,5 +61,38 @@ public class CountryFootball {
 
     public void setNbEventsLive(int nbEventsLive) {
         this.nbEventsLive = nbEventsLive;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeString(name);
+        parcel.writeString(urlImage);
+        parcel.writeInt(nbEvents);
+        parcel.writeInt(nbEventsLive);
+    }
+
+    public static final Parcelable.Creator<CountryFootball> CREATOR = new Parcelable.Creator<CountryFootball>() {
+        @Override
+        public CountryFootball createFromParcel(Parcel source) {
+            return new CountryFootball(source);
+        }
+        @Override
+        public CountryFootball[] newArray(int size) {
+            return new CountryFootball[size];
+        }
+    };
+
+    public CountryFootball(Parcel in) {
+        this.id = in.readLong();
+        this.name = in.readString();
+        this.urlImage = in.readString();
+        this.nbEvents = in.readInt();
+        this.nbEventsLive = in.readInt();
     }
 }

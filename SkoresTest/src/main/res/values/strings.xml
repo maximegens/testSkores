@@ -5,7 +5,9 @@
 
     <!-- Message Detail Country -->
     <string name="detail_tools_nb_match_country">Nombre de match du pays</string>
+    <string name="detail_tools_nb_match_live_country">Nombre de match en lives</string>
     <string name="detail_tools_name_country">Nom du pays</string>
+    <string name="detail_select_country">SELECTIONNER UN PAYS</string>
 
     <!-- Loading messages -->
     <string name="message_country_loading">Récupération des pays en cours...</string>

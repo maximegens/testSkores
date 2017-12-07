@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.maximegens.android.testskores.R;
+import com.maximegens.android.testskores.activities.R;
 import com.maximegens.android.testskores.data.beans.CountryFootball;
 
 /**
@@ -22,6 +22,7 @@ public class CountryViewHolder extends RecyclerView.ViewHolder{
     public CountryViewHolder(View itemView) {
         super(itemView);
         nameCountry = (TextView) itemView.findViewById(R.id.item_country_label);
+
     }
 
     /**

@@ -1,9 +1,9 @@
 package com.maximegens.android.testskores.fragments;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,13 +12,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.maximegens.android.testskores.R;
 import com.maximegens.android.testskores.activities.MainActivity;
+import com.maximegens.android.testskores.activities.R;
 import com.maximegens.android.testskores.adapters.AdapterCountry;
+import com.maximegens.android.testskores.adapters.RecyclerViewListener;
 import com.maximegens.android.testskores.asynctask.AsyncResponse;
 import com.maximegens.android.testskores.asynctask.ListCountryTask;
 import com.maximegens.android.testskores.data.beans.CountryFootball;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * A fragment for display football country list.
  */
-public class ListCountryFragments extends Fragment implements AsyncResponse{
+public class ListCountryFragments extends Fragment implements AsyncResponse, RecyclerViewListener {
 
     /** KEY for title**/
     private static final String TITLE = "TITLE";
@@ -75,7 +75,7 @@ public class ListCountryFragments extends Fragment implements AsyncResponse{
         listCountryTask.delegate = this;
         listCountryTask.execute();
 
-        adapterCountry = new AdapterCountry(listCountry);
+        adapterCountry = new AdapterCountry(listCountry, this);
         recyclerViewCountry.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewCountry.setAdapter(adapterCountry);
 
@@ -100,6 +100,11 @@ public class ListCountryFragments extends Fragment implements AsyncResponse{
         adapterCountry.setListCountry(listCountry);
         adapterCountry.notifyDataSetChanged();
         displayLoading(false);
+    }
+
+    @Override
+    public void onClickRecyclerView(CountryFootball countryFootball) {
+        listCountryFragmentsCallback.onCountrySelected(countryFootball);
     }
 
     /**

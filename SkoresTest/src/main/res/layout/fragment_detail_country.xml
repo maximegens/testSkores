@@ -18,14 +18,25 @@
         android:id="@+id/detail_name_country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/detail_tools_name_country"
-        android:layout_alignTop="@+id/detail_image_pays" />
+        tools:text="@string/detail_tools_name_country" />
 
     <TextView
-        android:id="@+id/detail_nb_match_country"
+        android:id="@+id/detail_nb_event_country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/detail_tools_nb_match_country"
-        android:layout_alignTop="@+id/detail_image_pays" />
+        tools:text="@string/detail_tools_nb_match_country"/>
+
+    <TextView
+        android:id="@+id/detail_nb_event_live_country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/detail_tools_nb_match_live_country" />
+
+    <TextView
+        android:id="@+id/detail_select_country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/detail_select_country" />
 
 </LinearLayout>
